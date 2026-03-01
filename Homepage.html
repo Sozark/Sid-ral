@@ -7,25 +7,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
-  <script src="js/main.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/d0041be44b.js" crossorigin="anonymous"></script>
 </head>
 
 <body> 
-  <header class="site-header">Creole Creations
-  </header>
-
-  <nav class="navbar">
-    <div class="hamburger-menu">
-      <i class="fa fa-bars menu-toggle"></i> 
+  <header class="site-header">
+  <div class="nav-container">
+    
+    <div class="hamburger" id="hamburger">
+      <i class="fa-solid fa-bars"></i>
     </div>
 
-    <div class="dropdown-links">
-      <a href="About.html" class="dropdown-link">About</a>
-      <a href="Products.html" class="dropdown-link">Products</a>
-      <a href="Booking.html" class="dropdown-link">Booking</a>
-      <a href="contact.html" class="dropdown-link">Contact</a>
+    <div class="logo">
+      Creole Creations
     </div>
-   </nav>  
+
+    <div class="cart-icon">
+      <i class="fa-solid fa-shopping-bag"></i>
+    </div>
+  </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="About.html">About</a>
+      <a href="Products.html">Products</a>
+      <a href="Booking.html" >Booking</a>
+      <a href="Contact.html" >Contact</a>
+    </div>
+  </header>  
 
    <main>
      <section class = "hero">
@@ -47,6 +55,6 @@
    </main>
 
   <footer class="site-footer">Created by Noah Jones</footer>
-
+<script src="js/main.js"></script>
 </body>
 </html>
