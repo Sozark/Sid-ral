@@ -1,22 +1,42 @@
 /* =====================================================
-   Creole Creations — main.css
-   Shared styles used across all pages
+   Sidèral — main.css
+   Speakeasy Luxury Aesthetic
+   Warm charcoal · Cognac amber · Candlelight glow
 ===================================================== */
 
-/* ----------- CSS Variables (Color Palette) ---------- */
+/* ----------- Color Palette ---------- */
 :root {
-    --pink: #E91E63;
-    --gold: #c9a84c;
-    --panel-w: 300px;
+    --berry:      #d4649a;
+    --berry-dim:  #8A3560;
+    --berry-glow: rgba(212, 100, 154, 0.18);
+    --cream:      #f5e0ef;
+    --cream-dim:  rgba(245, 224, 239, 0.55);
+    --rose:       #e890be;
+    --charcoal-1: #0c0008;
+    --charcoal-2: #110009;
+    --charcoal-3: #1a000f;
+    --charcoal-4: #22001a;
+    --panel-w:    300px;
+
+    /* Keep these aliases so all your existing rules still work */
+    --pink: #d4649a;
+    --gold: #d4649a;
+    --amber:      #d4649a;
+    --amber-dim:  #8A3560;
+    --amber-glow: rgba(212, 100, 154, 0.18);
 }
 
 /* ----------- Base Body ---------- */
+/* Warm deep charcoal with a faint noise-like grain */
 body {
-    background: #000;
+    background: var(--charcoal-1);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212,100,154,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 80% 110%, rgba(232,144,190,0.05) 0%, transparent 60%);
+    color: var(--cream);
 }
 
 /* ----------- Main Content Offset ---------- */
-/* Pushes page content below the fixed header */
 main {
     position: relative;
     z-index: 1;
@@ -32,12 +52,14 @@ main {
     position: fixed;
     top: 0;
     width: 100%;
-    background: black;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201, 168, 76, 0.18);
-    color: white;
-    z-index: 1000;
+    background: rgba(10, 8, 6, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(71, 20, 62, 0.2);
+    color: var(--cream);
+    z-index: 998;
+    /* Warm glow bleeding down from header */
+    box-shadow: 0 1px 40px rgba(200, 137, 58, 0.06);
 }
 
 /* ----------- Navigation Container ---------- */
@@ -51,31 +73,56 @@ main {
 }
 
 /* ----------- Logo ---------- */
+/* Art deco wide-spaced serif feel */
 .logo {
     font-family: 'Cinzel Decorative', serif;
     font-size: 1.1rem;
-    font-weight: bold;
-    letter-spacing: 3px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
     text-align: center;
     flex: 1;
-    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    background: linear-gradient(135deg, var(--cream) 20%, var(--amber) 60%, #E8C07A 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     user-select: none;
+    filter: drop-shadow(0 0 12px rgba(200, 137, 58, 0.25));
 }
 
 /* ----------- Cart Icon ---------- */
 .cart-icon {
     position: absolute;
     right: 30px;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
-    opacity: 0.85;
-    transition: opacity 0.2s;
+    opacity: 0.7;
+    color: var(--cream);
+    transition: opacity 0.25s, color 0.25s;
 }
 
-.cart-icon:hover { opacity: 1; }
+.cart-icon:hover {
+    opacity: 1;
+    color: var(--amber);
+}
+
+/* ----------- Cart Badge ---------- */
+#cartBadge {
+    display: none;
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    width: 17px;
+    height: 17px;
+    background: var(--amber);
+    border-radius: 50%;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 400;
+    color: var(--charcoal-1);
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
 
 /* =====================================================
    HAMBURGER MENU ICON
@@ -86,7 +133,7 @@ main {
     position: absolute;
     left: 30px;
     width: 26px;
-    height: 20px;
+    height: 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -97,21 +144,21 @@ main {
 /* ----------- Hamburger Bars ---------- */
 .hamburger span {
     display: block;
-    height: 3px;
+    height: 1.5px;
     width: 100%;
-    background: white;
-    border-radius: 2px;
+    background: var(--cream-dim);
+    border-radius: 1px;
     transform-origin: left center;
     transition:
-        transform 0.4s cubic-bezier(0.75, 0, 0.175, 1),
-        opacity 0.3s ease,
+        transform  0.4s cubic-bezier(0.75, 0, 0.175, 1),
+        opacity    0.3s ease,
         background 0.3s ease;
 }
 
-/* ----------- Hamburger Animates into an X when Active ---------- */
+/* ----------- Hamburger Animates to X when Active ---------- */
 .hamburger.active span:nth-child(1) {
     transform: rotate(42deg) translateY(-1px);
-    background: var(--gold);
+    background: var(--amber);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -121,32 +168,31 @@ main {
 
 .hamburger.active span:nth-child(3) {
     transform: rotate(-42deg) translateY(1px);
-    background: var(--gold);
+    background: var(--amber);
 }
 
 /* =====================================================
-   DARK OVERLAY (appears behind the open menu)
+   DARK OVERLAY
 ===================================================== */
 
 .overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    backdrop-filter: blur(2px);
+    background: rgba(5, 4, 3, 0.78);
+    backdrop-filter: blur(3px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.4s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
     z-index: 998;
 }
 
-/* ----------- Overlay becomes visible when menu opens ---------- */
 .overlay.active {
     opacity: 1;
     visibility: visible;
 }
 
 /* =====================================================
-   MOBILE SIDE MENU
+   MOBILE SIDE MENU — Speakeasy velvet panel
 ===================================================== */
 
 /* ----------- Menu Panel ---------- */
@@ -155,17 +201,20 @@ main {
     top: 0;
     left: 0;
     transform: translateX(-100%);
-    width: 260px;
+    width: var(--panel-w);
     height: 100vh;
-    background: linear-gradient(170deg, #0e0118 0%, #050508 55%, #0a000d 100%);
-    border-right: 1px solid rgba(201, 168, 76, 0.15);
-    color: white;
+    /* Deep warm black with subtle vignette */
+     background:
+        radial-gradient(ellipse 120% 60% at -10% 30%, rgba(212,100,154,0.09) 0%, transparent 60%),
+        linear-gradient(170deg, #1e0012 0%, #110008 55%, #0c0008 100%);
+    border-right: 1px solid rgba(200, 58, 181, 0.18);
+    color: var(--cream);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: transform 0.48s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 999;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+    box-shadow: 6px 0 40px rgba(0, 0, 0, 0.6);
 }
 
 /* ----------- Menu Slides In when Active ---------- */
@@ -173,30 +222,30 @@ main {
     transform: translateX(0);
 }
 
-/* ----------- Decorative Nebula Glow Top Left ---------- */
+/* ----------- Candlelight Glow Top Left ---------- */
 .mobile-menu::before {
+    content: '';
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    top: -60px;
+    left: -60px;
+    border-radius: 50%;
+    background: rgba(200, 137, 58, 0.07);
+    filter: blur(60px);
+    pointer-events: none;
+}
+
+/* ----------- Warm Glow Bottom Right ---------- */
+.mobile-menu::after {
     content: '';
     position: absolute;
     width: 200px;
     height: 200px;
-    top: -50px;
-    left: -50px;
+    bottom: 40px;
+    right: -80px;
     border-radius: 50%;
-    background: rgba(233, 30, 99, 0.1);
-    filter: blur(50px);
-    pointer-events: none;
-}
-
-/* ----------- Decorative Nebula Glow Bottom Right ---------- */
-.mobile-menu::after {
-    content: '';
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    bottom: 60px;
-    right: -60px;
-    border-radius: 50%;
-    background: rgba(100, 20, 200, 0.09);
+    background: rgba(184, 113, 79, 0.06);
     filter: blur(50px);
     pointer-events: none;
 }
@@ -204,28 +253,28 @@ main {
 /* ----------- Menu Branding Header ---------- */
 .menu-header {
     position: relative;
-    padding: 36px 32px 28px;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    padding: 40px 32px 28px;
+    border-bottom: 1px solid rgba(200, 137, 58, 0.1);
 }
 
-/* ----------- Gold Accent Line Under Menu Header ---------- */
+/* ----------- Amber Accent Line Under Menu Header ---------- */
 .menu-header::after {
     content: '';
     position: absolute;
     bottom: -1px;
     left: 32px;
-    width: 40px;
+    width: 36px;
     height: 1px;
-    background: var(--gold);
-    opacity: 0.7;
+    background: var(--amber);
+    opacity: 0.6;
 }
 
 /* ----------- Menu Logo Text ---------- */
 .menu-logo {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    background: linear-gradient(135deg, #fff 30%, var(--gold) 100%);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    background: linear-gradient(135deg, var(--cream) 20%, var(--amber) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -236,8 +285,8 @@ main {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 0.78rem;
-    color: rgba(201, 168, 76, 0.6);
-    margin-top: 4px;
+    color: rgba(200, 137, 58, 0.5);
+    margin-top: 5px;
     letter-spacing: 0.06em;
 }
 
@@ -246,7 +295,7 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 36px 0 24px;
+    padding: 40px 0 24px;
 }
 
 /* ----------- Individual Navigation Links ---------- */
@@ -254,67 +303,61 @@ main {
     display: flex;
     align-items: center;
     gap: 14px;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(240, 230, 208, 0.6);
     text-decoration: none;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.65rem;
+    font-size: 1.7rem;
     font-weight: 300;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     padding: 10px 32px;
     position: relative;
-    /* Links start hidden and slide in when menu opens */
     opacity: 0;
-    transform: translateX(-22px);
+    transform: translateX(-20px);
     transition:
-        opacity   0.4s ease,
-        transform 0.4s ease,
-        color     0.25s ease,
+        opacity      0.4s ease,
+        transform    0.4s ease,
+        color        0.25s ease,
         padding-left 0.25s ease;
 }
 
-/* ----------- Number Ornament next to each Link ---------- */
+/* ----------- Number Ornaments ---------- */
 .mobile-menu a .link-num {
     font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     font-weight: 200;
-    letter-spacing: 0.12em;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-top: 4px;
+    letter-spacing: 0.14em;
+    color: var(--amber);
+    opacity: 0.5;
+    margin-top: 6px;
     min-width: 18px;
     transition: opacity 0.25s;
 }
 
-/* ----------- Pink Left Accent Bar on Hover ---------- */
+/* ----------- Amber Left Accent Bar on Hover ---------- */
 .mobile-menu a::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 14px;
-    bottom: 14px;
-    width: 2px;
-    background: var(--pink);
+    top: 16px;
+    bottom: 16px;
+    width: 1.5px;
+    background: var(--amber);
     transform: scaleY(0);
     transform-origin: center;
-    border-radius: 2px;
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .mobile-menu a:hover::before { transform: scaleY(1); }
 
 .mobile-menu a:hover {
-    color: #fff;
+    color: var(--cream);
     padding-left: 40px;
 }
 
 .mobile-menu a:hover .link-num { opacity: 1; }
 
 /* ----------- Links Stagger In when Menu Opens ---------- */
-.mobile-menu.active a {
-    opacity: 1;
-    transform: translateX(0);
-}
-
+.mobile-menu.active a              { opacity: 1; transform: translateX(0); }
 .mobile-menu.active a:nth-child(1) { transition-delay: 0.10s; }
 .mobile-menu.active a:nth-child(2) { transition-delay: 0.18s; }
 .mobile-menu.active a:nth-child(3) { transition-delay: 0.26s; }
@@ -323,83 +366,93 @@ main {
 /* ----------- Links Hide Instantly when Menu Closes ---------- */
 .mobile-menu:not(.active) a { transition-delay: 0s !important; }
 
-/* ----------- Menu Social Icons Footer ---------- */
+/* ----------- Social Icons Footer ---------- */
 .menu-footer {
-    padding: 24px 32px 32px;
-    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    padding: 24px 32px 36px;
+    border-top: 1px solid rgba(200, 137, 58, 0.08);
 }
 
 .menu-socials {
     display: flex;
-    gap: 14px;
+    gap: 12px;
 }
 
 .menu-socials a {
     width: 34px;
     height: 34px;
-    border: 1px solid rgba(201, 168, 76, 0.25);
+    border: 1px solid rgba(200, 58, 198, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
+    color: rgba(240, 208, 239, 0.4);
+    font-size: 0.68rem;
     text-decoration: none;
     font-family: 'Jost', sans-serif;
     letter-spacing: 0.03em;
-    transition: border-color 0.25s, color 0.25s;
+    transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
     opacity: 1 !important;
     transform: none !important;
     padding: 0;
 }
 
 .menu-socials a:hover {
-    border-color: var(--pink);
-    color: var(--pink);
-    background: rgba(233, 30, 99, 0.08);
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(200, 58, 179, 0.08);
+    box-shadow: 0 0 12px rgba(200, 137, 58, 0.15);
 }
 
 /* =====================================================
    BUTTONS
 ===================================================== */
 
-/* ----------- Pink Primary Button ---------- */
+/* ----------- Primary Button — Warm Amber ---------- */
 .btn-primary {
     display: inline-block;
-    background-color: #E91E63;
-    color: white;
-    padding: 12px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #c2185b;
-    transform: scale(1.05);
-}
-
-/* ----------- Ghost / Outline Button ---------- */
-.btn-ghost {
-    display: inline-block;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: 2px;
-    color: white;
+    border: 1px solid var(--amber);
+    border-radius: 1px;
+    color: var(--amber);
     padding: 13px 38px;
     text-decoration: none;
     font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 300;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    transition: border-color 0.3s, background 0.3s;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.btn-primary:hover {
+    background: rgba(200, 137, 58, 0.1);
+    box-shadow: 0 0 28px rgba(200, 137, 58, 0.25),
+                inset 0 0 16px rgba(200, 137, 58, 0.06);
+    color: var(--cream);
+}
+
+/* ----------- Ghost Button ---------- */
+.btn-ghost {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid rgba(240, 230, 208, 0.2);
+    border-radius: 1px;
+    color: rgba(240, 230, 208, 0.6);
+    padding: 13px 38px;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 300;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    transition: border-color 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .btn-ghost:hover {
-    border-color: var(--gold);
-    background: rgba(201, 168, 76, 0.08);
+    border-color: var(--amber);
+    background: rgba(200, 137, 58, 0.06);
+    color: var(--cream);
+    box-shadow: 0 0 20px rgba(200, 137, 58, 0.12);
 }
 
 /* =====================================================
@@ -410,64 +463,67 @@ main {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 20px;
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.8rem;
+    padding: 28px 20px;
+    color: rgba(200, 137, 58, 0.25);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 200;
+    letter-spacing: 0.18em;
+    border-top: 1px solid rgba(200, 137, 58, 0.08);
 }
 
 /* =====================================================
-   INNER PAGE HERO (About, Contact, Booking, Products)
+   INNER PAGE HERO
 ===================================================== */
 
-/* ----------- Page Hero Section ---------- */
 .page-hero {
     text-align: center;
-    padding: 60px 20px 30px;
+    padding: 70px 20px 40px;
 }
 
-/* ----------- Eyebrow Label above heading ---------- */
+/* ----------- Eyebrow Label ---------- */
 .page-hero__eyebrow {
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 300;
-    letter-spacing: 0.28em;
+    font-size: 0.68rem;
+    font-weight: 200;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 14px;
+    color: var(--amber);
+    margin-bottom: 16px;
+    opacity: 0.8;
 }
 
 /* ----------- Page Title ---------- */
 .page-hero__title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
     font-weight: 300;
     letter-spacing: 0.06em;
-    color: white;
+    color: var(--cream);
     margin-bottom: 16px;
+    line-height: 1.1;
 }
 
 /* ----------- Page Subtitle ---------- */
 .page-hero__sub {
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 200;
-    letter-spacing: 0.06em;
-    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.08em;
+    color: rgba(240, 230, 208, 0.4);
     max-width: 480px;
     margin: 0 auto;
-    line-height: 1.7;
+    line-height: 1.75;
 }
 
 /* =====================================================
-   HOMEPAGE — Video Hero
+   HOMEPAGE — Scroll Reveal
 ===================================================== */
 
-/* ----------- Scroll Reveal Base State ---------- */
-/* Elements start invisible and slide up into view */
 .reveal {
     opacity: 0;
-    transform: translateY(36px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(30px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
 }
 
 .reveal.visible {
@@ -475,7 +531,10 @@ main {
     transform: translateY(0);
 }
 
-/* ----------- Hero Section ---------- */
+/* =====================================================
+   HOMEPAGE — Video Hero
+===================================================== */
+
 .hero {
     position: relative;
     height: 100vh;
@@ -496,16 +555,14 @@ main {
     z-index: 0;
 }
 
-/* ----------- Dark Gradient Over Video ---------- */
+/* ----------- Warm Candlelight Dim Over Video ---------- */
+/* Darker at edges, lighter in center like a spotlight */
 .hero__dim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.35) 0%,
-        rgba(0,0,0,0.55) 60%,
-        rgba(0,0,0,0.75) 100%
-    );
+    background:
+        radial-gradient(ellipse 70% 60% at 50% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.78) 100%),
+        linear-gradient(to bottom, rgba(10,8,6,0.4) 0%, rgba(10,8,6,0.2) 40%, rgba(10,8,6,0.75) 100%);
     z-index: 1;
 }
 
@@ -521,44 +578,46 @@ main {
 /* ----------- Hero Eyebrow ---------- */
 .hero__eyebrow {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.32em;
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.38em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
+    color: var(--amber);
+    margin-bottom: 24px;
     opacity: 0;
-    animation: fadeUp 0.9s ease 0.3s forwards;
+    animation: fadeUp 1s ease 0.3s forwards;
 }
 
 /* ----------- Hero Main Title ---------- */
 .hero__title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-size: clamp(3.8rem, 10vw, 8rem);
     font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: 0.03em;
-    color: white;
-    margin-bottom: 20px;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    margin-bottom: 24px;
     opacity: 0;
-    animation: fadeUp 0.9s ease 0.5s forwards;
+    animation: fadeUp 1s ease 0.55s forwards;
+    /* Warm candlelight text glow */
+    text-shadow: 0 0 60px rgba(200, 137, 58, 0.12);
 }
 
 .hero__title em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
 }
 
 /* ----------- Hero Subheading ---------- */
 .hero__sub {
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 200;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.65);
-    margin-bottom: 40px;
+    letter-spacing: 0.14em;
+    color: rgba(240, 208, 236, 0.55);
+    margin-bottom: 44px;
     opacity: 0;
-    animation: fadeUp 0.9s ease 0.7s forwards;
+    animation: fadeUp 1s ease 0.75s forwards;
 }
 
 /* ----------- Hero Call to Action Buttons ---------- */
@@ -568,7 +627,7 @@ main {
     justify-content: center;
     flex-wrap: wrap;
     opacity: 0;
-    animation: fadeUp 0.9s ease 0.9s forwards;
+    animation: fadeUp 1s ease 0.95s forwards;
 }
 
 /* ----------- Scroll Indicator ---------- */
@@ -583,72 +642,70 @@ main {
     align-items: center;
     gap: 10px;
     opacity: 0;
-    animation: fadeUp 0.9s ease 1.2s forwards;
+    /* animation: fadeUp 1s ease 1.3s forwards; */
 }
 
 .hero__scroll span {
     font-family: 'Jost', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 300;
-    letter-spacing: 0.28em;
+    font-size: 0.58rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(200, 137, 58, 0.4);
 }
 
-/* ----------- Animated Line under Scroll Text ---------- */
+/* ----------- Animated Candlelight Line ---------- */
 .hero__scroll-line {
     width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, rgba(201,168,76,0.6), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+    height: 44px;
+    background: linear-gradient(to bottom, rgba(200, 58, 190, 0.7), transparent);
+    animation: scrollPulse 2.5s ease-in-out infinite;
 }
 
-/* ----------- Keyframe Animations ---------- */
+/* ----------- Keyframes ---------- */
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(22px); }
+    from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scrollPulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1);    }
-    50%       { opacity: 1;   transform: scaleY(1.15); }
+    0%, 100% { opacity: 0.3; transform: scaleY(1);    }
+    50%       { opacity: 0.9; transform: scaleY(1.12); }
 }
 
 /* =====================================================
    HOMEPAGE — Marquee Ticker
 ===================================================== */
 
-/* ----------- Marquee Strip ---------- */
 .marquee {
     overflow: hidden;
-    border-top: 1px solid rgba(201,168,76,0.15);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
-    padding: 14px 0;
-    background: rgba(0,0,0,0.6);
+    border-top: 1px solid rgba(200, 137, 58, 0.12);
+    border-bottom: 1px solid rgba(200, 137, 58, 0.12);
+    padding: 15px 0;
+    background: rgba(15, 11, 8, 0.85);
 }
 
-/* ----------- Scrolling Track ---------- */
 .marquee__track {
     display: flex;
     white-space: nowrap;
-    animation: marqueeScroll 28s linear infinite;
+    animation: marqueeScroll 30s linear infinite;
 }
 
 .marquee__track span {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.22em;
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    padding: 0 20px;
+    color: rgba(240, 230, 208, 0.35);
+    padding: 0 24px;
 }
 
-/* ----------- Gold Star Separator between Marquee Items ---------- */
+/* ----------- Amber Diamond Separators ---------- */
 .marquee__sep {
-    color: var(--gold) !important;
-    opacity: 0.6;
-    padding: 0 4px !important;
+    color: var(--amber) !important;
+    opacity: 0.5;
+    padding: 0 6px !important;
 }
 
 @keyframes marqueeScroll {
@@ -661,45 +718,49 @@ main {
 ===================================================== */
 
 .intro {
-    padding: 100px 40px;
-    max-width: 800px;
+    padding: 110px 40px;
+    max-width: 820px;
     margin: 0 auto;
     text-align: center;
+    /* Subtle horizontal amber rule above */
+    border-top: 1px solid rgba(200, 137, 58, 0.1);
 }
 
 .intro__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.28em;
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
+    color: var(--amber);
+    margin-bottom: 22px;
+    opacity: 0.8;
 }
 
 .intro__heading {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.6rem, 5vw, 4.2rem);
     font-weight: 300;
-    color: white;
-    line-height: 1.15;
+    color: var(--cream);
+    line-height: 1.12;
     letter-spacing: 0.04em;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 }
 
 .intro__heading em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
 }
 
 .intro__text {
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 200;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.85;
+    color: rgba(240, 230, 208, 0.45);
+    line-height: 1.9;
     max-width: 540px;
-    margin: 0 auto 36px;
+    margin: 0 auto 40px;
+    letter-spacing: 0.03em;
 }
 
 /* =====================================================
@@ -707,53 +768,53 @@ main {
 ===================================================== */
 
 .featured {
-    padding: 0 40px 100px;
+    padding: 0 40px 110px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* ----------- Section Header Row ---------- */
 .featured__header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(200, 137, 58, 0.1);
 }
 
 .featured__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.26em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
     width: 100%;
+    opacity: 0.8;
 }
 
 .featured__heading {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 300;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.04em;
 }
 
-/* ----------- View All Link ---------- */
 .featured__all {
     font-family: 'Jost', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 300;
-    letter-spacing: 0.14em;
-    color: rgba(255,255,255,0.4);
+    font-size: 0.68rem;
+    font-weight: 200;
+    letter-spacing: 0.16em;
+    color: rgba(240, 230, 208, 0.3);
     text-decoration: none;
     transition: color 0.25s;
 }
 
-.featured__all:hover { color: var(--gold); }
+.featured__all:hover { color: var(--amber); }
 
-/* ----------- Three Column Product Grid ---------- */
 .featured__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -769,61 +830,62 @@ main {
 .feat-card {
     text-decoration: none;
     display: block;
-    border: 1px solid rgba(201,168,76,0.12);
-    border-radius: 4px;
+    border: 1px solid rgba(200, 137, 58, 0.1);
+    border-radius: 2px;
     overflow: hidden;
-    transition: border-color 0.25s, transform 0.35s ease;
+    background: rgba(21, 15, 10, 0.6);
+    transition: border-color 0.3s, transform 0.4s ease, box-shadow 0.4s;
 }
 
 .feat-card:hover {
-    border-color: rgba(201,168,76,0.3);
-    transform: translateY(-4px);
+    border-color: rgba(200, 137, 58, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 24px rgba(200, 137, 58, 0.06);
 }
 
-/* ----------- Card Image — replace gradients with real photos ---------- */
 .feat-card__img {
     aspect-ratio: 3 / 4;
     width: 100%;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
 }
 
-.feat-card:hover .feat-card__img { transform: scale(1.04); }
+.feat-card:hover .feat-card__img { transform: scale(1.05); }
 
-.feat-card__img--1 { background: linear-gradient(160deg, #1a0025 0%, #3d0050 100%); }
-.feat-card__img--2 { background: linear-gradient(160deg, #00101a 0%, #003050 100%); }
-.feat-card__img--3 { background: linear-gradient(160deg, #1a1000 0%, #4a2800 100%); }
+/* ----------- Warm Gradient Placeholders ---------- */
+.feat-card__img--1 { background: url(/images/MockupSerum.jpg) center / cover no-repeat; }
+.feat-card__img--2 { background: url(/images/EyePallette.jpg) center / cover no-repeat; }
+.feat-card__img--3 { background: url(/images/BodyOil.jpg) center / cover no-repeat; }
 
-/* ----------- Card Body ---------- */
 .feat-card__body {
-    padding: 16px 18px 20px;
-    background: rgba(255,255,255,0.02);
+    padding: 18px 20px 22px;
+    background: rgba(15, 11, 8, 0.7);
 }
 
 .feat-card__cat {
     font-family: 'Jost', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
+    font-size: 0.6rem;
+    font-weight: 200;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 4px;
+    color: var(--amber);
+    opacity: 0.65;
+    margin-bottom: 6px;
 }
 
 .feat-card__name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 400;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.03em;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .feat-card__price {
     font-family: 'Jost', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.5);
+    font-size: 0.82rem;
+    font-weight: 200;
+    color: rgba(240, 230, 208, 0.4);
 }
 
 /* =====================================================
@@ -832,16 +894,15 @@ main {
 
 .banner {
     position: relative;
-    height: 70vh;
-    min-height: 420px;
+    height: 72vh;
+    min-height: 440px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 100px;
+    margin-bottom: 110px;
 }
 
-/* ----------- Banner Background Video ---------- */
 .banner__video {
     position: absolute;
     inset: 0;
@@ -852,25 +913,34 @@ main {
     z-index: 0;
 }
 
-/* ----------- Dark Overlay Over Banner Video ---------- */
-.banner__dim {
+/* ----------- Banner Background Image ---------- */
+.banner__img {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 1;
+    background: url(../images/BlackWoman.jpeg) center / cover no-repeat;
+    transform: scale(1.04);
+    transition: transform 10s ease;
 }
 
 .banner:hover .banner__img { transform: scale(1.0); }
 
-/* ----------- Dark Overlay on Banner ---------- */
+/* ----------- Warm Vignette Over Banner ---------- */
+.banner__dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    z-index: 1;
+}
+
 .banner::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.55);
+    background:
+        radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.3) 0%, rgba(10,8,6,0.7) 100%);
+    z-index: 1;
 }
 
-/* ----------- Banner Text ---------- */
 .banner__content {
     position: relative;
     z-index: 2;
@@ -880,78 +950,86 @@ main {
 
 .banner__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.3em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.36em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
+    color: var(--amber);
+    margin-bottom: 18px;
+    opacity: 0.85;
 }
 
 .banner__heading {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 300;
-    color: white;
-    line-height: 1.05;
+    color: var(--cream);
+    line-height: 1.0;
     letter-spacing: 0.04em;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
+    text-shadow: 0 0 80px rgba(200, 137, 58, 0.15);
 }
 
 .banner__heading em {
     font-style: italic;
-    color: var(--gold);
+    color: var(--amber);
 }
 
 /* =====================================================
    HOMEPAGE — Values Row
 ===================================================== */
 
-/* ----------- Three Column Values Grid ---------- */
 .values {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border: 1px solid rgba(201,168,76,0.12);
+    border: 1px solid rgba(200, 137, 58, 0.1);
     max-width: 1100px;
-    margin: 0 auto 100px;
+    margin: 0 auto 110px;
+    background: rgba(15, 11, 8, 0.4);
 }
 
 @media (max-width: 700px) {
     .values { grid-template-columns: 1fr; }
 }
 
-/* ----------- Individual Value Item ---------- */
 .values__item {
-    padding: 52px 40px;
+    padding: 56px 44px;
     text-align: center;
-    border-right: 1px solid rgba(201,168,76,0.12);
+    border-right: 1px solid rgba(200, 137, 58, 0.1);
+    transition: background 0.4s;
 }
 
 .values__item:last-child { border-right: none; }
 
+.values__item:hover {
+    background: rgba(200, 137, 58, 0.03);
+}
+
 .values__icon {
     display: block;
-    font-size: 1.4rem;
-    color: var(--gold);
-    opacity: 0.7;
-    margin-bottom: 18px;
+    font-size: 1.3rem;
+    color: var(--amber);
+    opacity: 0.6;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 8px rgba(200, 137, 58, 0.3));
 }
 
 .values__title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 400;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.04em;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .values__text {
     font-family: 'Jost', sans-serif;
     font-size: 0.8rem;
     font-weight: 200;
-    color: rgba(255,255,255,0.4);
-    line-height: 1.75;
+    color: rgba(240, 230, 208, 0.35);
+    line-height: 1.8;
+    letter-spacing: 0.03em;
 }
 
 /* =====================================================
@@ -960,7 +1038,7 @@ main {
 
 .gallery {
     text-align: center;
-    padding: 0 40px 100px;
+    padding: 0 40px 110px;
 }
 
 @media (max-width: 600px) {
@@ -969,107 +1047,105 @@ main {
 
 .gallery__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.28em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
+    color: var(--amber);
+    margin-bottom: 10px;
+    opacity: 0.8;
 }
 
 .gallery__heading {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 300;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.06em;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
 }
 
-/* ----------- Six Column Photo Grid ---------- */
 .gallery__grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 6px;
+    gap: 4px;
 }
 
 @media (max-width: 700px) {
     .gallery__grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ----------- Gallery Cell — replace gradients with real photos ---------- */
 .gallery__cell {
     aspect-ratio: 1;
     overflow: hidden;
     cursor: pointer;
-    background-size: cover;
-    background-position: center;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.4s ease;
 }
 
-.gallery__cell:hover { opacity: 0.8; }
+.gallery__cell:hover {
+    opacity: 0.75;
+    transform: scale(0.98);
+}
 
-.gallery__cell--1 { background: linear-gradient(135deg, #1a0025, #4a0060); }
-.gallery__cell--2 { background: linear-gradient(135deg, #1f0010, #5c0030); }
-.gallery__cell--3 { background: linear-gradient(135deg, #00101a, #003050); }
-.gallery__cell--4 { background: linear-gradient(135deg, #0a1a00, #1a4000); }
-.gallery__cell--5 { background: linear-gradient(135deg, #1a1000, #4a2800); }
-.gallery__cell--6 { background: linear-gradient(135deg, #0d0020, #280050); }
+/* ----------- Warm Placeholder Gradients ---------- */
+.gallery__cell--1 { background: url(/images/Kwesi.jpg) center / cover no-repeat; }
+.gallery__cell--2 { background: url(/images/Gideon-Hezekiah.jpg) center / cover no-repeat; }
+.gallery__cell--3 { background: url(/images/KhaliifaHussein.jpg) center / cover no-repeat; }
+.gallery__cell--4 { background: url(/images/JessicaFelicio.jpg) center / cover no-repeat; }
+.gallery__cell--5 { background: url(/images/OyeShotThis.jpg) center / cover no-repeat; }
+.gallery__cell--6 { background: url(/images/ModelForGoodFaces.jpg) center / cover no-repeat; }
 
 /* =====================================================
    CONTACT PAGE
 ===================================================== */
 
-/* ----------- Contact Form Container ---------- */
 .form-container {
     max-width: 580px;
     margin: 0 auto;
     padding: 40px 20px 80px;
 }
 
-/* ----------- Stacks all form fields vertically ---------- */
 #contactForm {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
-/* ----------- Form Labels ---------- */
 #contactForm label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 300;
-    letter-spacing: 0.18em;
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
+    opacity: 0.8;
 }
 
-/* ----------- Form Inputs and Textarea ---------- */
 #contactForm input,
 #contactForm textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    border-radius: 4px;
-    color: white;
+    background: rgba(21, 15, 10, 0.7);
+    border: 1px solid rgba(200, 137, 58, 0.18);
+    border-radius: 1px;
+    color: var(--cream);
     font-family: 'Jost', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 300;
-    padding: 12px 16px;
+    font-size: 0.9rem;
+    font-weight: 200;
+    padding: 13px 16px;
     outline: none;
-    transition: border-color 0.25s;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    letter-spacing: 0.04em;
 }
 
-/* ----------- Pink Border on Focus ---------- */
 #contactForm input:focus,
 #contactForm textarea:focus {
-    border-color: var(--pink);
+    border-color: var(--amber);
+    box-shadow: 0 0 16px rgba(200, 137, 58, 0.08);
 }
 
-/* ----------- Placeholder Text Color ---------- */
 #contactForm input::placeholder,
 #contactForm textarea::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(240, 230, 208, 0.18);
 }
 
 #contactForm textarea {
@@ -1077,38 +1153,37 @@ main {
     min-height: 140px;
 }
 
-/* ----------- Submit Button ---------- */
 #contactForm button {
     align-self: flex-start;
     background: transparent;
-    border: 1px solid var(--pink);
-    border-radius: 2px;
-    color: white;
+    border: 1px solid var(--amber);
+    border-radius: 1px;
+    color: var(--amber);
     cursor: pointer;
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
+    font-size: 0.72rem;
+    font-weight: 200;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    padding: 13px 38px;
+    padding: 14px 42px;
     margin-top: 8px;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
 #contactForm button:hover {
-    background: rgba(233, 30, 99, 0.12);
-    box-shadow: 0 0 20px rgba(233, 30, 99, 0.2);
+    background: rgba(200, 137, 58, 0.08);
+    box-shadow: 0 0 24px rgba(200, 137, 58, 0.18);
+    color: var(--cream);
 }
 
 /* =====================================================
    BOOKING PAGE
 ===================================================== */
 
-/* ----------- Two Column Layout — Services + Form ---------- */
 .booking-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
+    gap: 52px;
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 40px 80px;
@@ -1121,96 +1196,92 @@ main {
     }
 }
 
-/* ----------- Section Label ---------- */
 .booking-services__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.26em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
+    color: var(--amber);
+    margin-bottom: 22px;
+    opacity: 0.8;
 }
 
-/* ----------- Service Cards Column ---------- */
 .booking-services {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-/* ----------- Individual Service Card ---------- */
 .service-card {
     cursor: pointer;
     display: block;
 }
 
-/* ----------- Hide the Native Radio Button ---------- */
 .service-card input[type="radio"] {
     display: none;
 }
 
 .service-card__inner {
-    border: 1px solid rgba(201, 168, 76, 0.15);
-    border-radius: 4px;
+    border: 1px solid rgba(200, 137, 58, 0.12);
+    border-radius: 1px;
     padding: 20px 22px;
-    transition: border-color 0.25s, background 0.25s;
-    background: rgba(255, 255, 255, 0.02);
+    transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    background: rgba(21, 15, 10, 0.5);
 }
 
 .service-card:hover .service-card__inner {
-    border-color: rgba(201, 168, 76, 0.35);
-    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(200, 137, 58, 0.3);
+    background: rgba(200, 137, 58, 0.04);
 }
 
-/* ----------- Card Highlights Pink when Selected ---------- */
 .service-card input:checked + .service-card__inner {
-    border-color: var(--pink);
-    background: rgba(233, 30, 99, 0.06);
+    border-color: var(--amber);
+    background: rgba(200, 137, 58, 0.06);
+    box-shadow: 0 0 20px rgba(200, 137, 58, 0.08);
 }
 
 .service-card__top {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 .service-card__name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 400;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.04em;
 }
 
 .service-card__price {
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 300;
-    color: var(--gold);
+    font-size: 0.85rem;
+    font-weight: 200;
+    color: var(--amber);
     letter-spacing: 0.06em;
 }
 
 .service-card__desc {
     font-family: 'Jost', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 200;
-    color: rgba(255, 255, 255, 0.45);
-    line-height: 1.6;
+    color: rgba(240, 230, 208, 0.38);
+    line-height: 1.65;
     margin-bottom: 10px;
 }
 
 .service-card__duration {
     font-family: 'Jost', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 300;
-    letter-spacing: 0.16em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(201, 168, 76, 0.5);
+    color: rgba(200, 137, 58, 0.4);
 }
 
-/* ----------- Booking Form Column ---------- */
 .booking-form-wrap {
     display: flex;
     flex-direction: column;
@@ -1222,11 +1293,10 @@ main {
     gap: 16px;
 }
 
-/* ----------- Two Fields Side by Side ---------- */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 14px;
 }
 
 @media (max-width: 500px) {
@@ -1236,59 +1306,58 @@ main {
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 7px;
 }
 
-/* ----------- Booking Form Labels ---------- */
 .booking-form label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.18em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--amber);
+    opacity: 0.8;
 }
 
-/* ----------- Booking Form Inputs ---------- */
 .booking-form input,
 .booking-form select,
 .booking-form textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    border-radius: 4px;
-    color: white;
+    background: rgba(21, 15, 10, 0.7);
+    border: 1px solid rgba(200, 137, 58, 0.15);
+    border-radius: 1px;
+    color: var(--cream);
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 300;
-    padding: 11px 14px;
+    font-size: 0.88rem;
+    font-weight: 200;
+    padding: 12px 14px;
     outline: none;
-    transition: border-color 0.25s;
+    transition: border-color 0.25s, box-shadow 0.25s;
     appearance: none;
     -webkit-appearance: none;
+    letter-spacing: 0.04em;
 }
 
 .booking-form input:focus,
 .booking-form select:focus,
 .booking-form textarea:focus {
-    border-color: var(--pink);
+    border-color: var(--amber);
+    box-shadow: 0 0 14px rgba(200, 137, 58, 0.08);
 }
 
 .booking-form input::placeholder,
 .booking-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(240, 230, 208, 0.16);
 }
 
-/* ----------- Fixes the Date Picker Icon Color ---------- */
 .booking-form input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) opacity(0.4);
+    filter: invert(0.6) sepia(0.5) saturate(2) hue-rotate(10deg) opacity(0.5);
     cursor: pointer;
 }
 
-/* ----------- Dropdown Option Background ---------- */
 .booking-form select option {
-    background: #0e0118;
-    color: white;
+    background: var(--charcoal-3);
+    color: var(--cream);
 }
 
 .booking-form textarea {
@@ -1296,75 +1365,72 @@ main {
     min-height: 110px;
 }
 
-/* ----------- Booking Submit Button ---------- */
 .booking-submit {
     align-self: flex-start;
     background: transparent;
-    border: 1px solid var(--pink);
-    border-radius: 2px;
-    color: white;
+    border: 1px solid var(--amber);
+    border-radius: 1px;
+    color: var(--amber);
     cursor: pointer;
     font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 300;
-    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    font-weight: 200;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
-    padding: 14px 42px;
+    padding: 14px 44px;
     margin-top: 8px;
-    transition: background 0.3s, box-shadow 0.3s;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
 .booking-submit:hover {
-    background: rgba(233, 30, 99, 0.12);
-    box-shadow: 0 0 24px rgba(233, 30, 99, 0.2);
+    background: rgba(200, 137, 58, 0.08);
+    box-shadow: 0 0 28px rgba(200, 137, 58, 0.18);
+    color: var(--cream);
 }
 
 /* =====================================================
    PRODUCTS PAGE
 ===================================================== */
 
-/* ----------- Category Filter Bar ---------- */
 .products-filter {
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
-    padding: 0 20px 48px;
+    padding: 0 20px 52px;
 }
 
-/* ----------- Individual Filter Button ---------- */
 .filter-btn {
     background: transparent;
-    border: 1px solid rgba(201, 168, 76, 0.2);
-    border-radius: 2px;
-    color: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(200, 137, 58, 0.15);
+    border-radius: 1px;
+    color: rgba(240, 230, 208, 0.35);
     cursor: pointer;
     font-family: 'Jost', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 300;
-    letter-spacing: 0.2em;
+    font-size: 0.65rem;
+    font-weight: 200;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     padding: 9px 22px;
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
 }
 
 .filter-btn:hover {
-    border-color: rgba(201, 168, 76, 0.5);
-    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(200, 137, 58, 0.4);
+    color: rgba(240, 230, 208, 0.75);
 }
 
-/* ----------- Active Filter Highlights Pink ---------- */
 .filter-btn.active {
-    border-color: var(--pink);
-    color: white;
-    background: rgba(233, 30, 99, 0.1);
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(200, 137, 58, 0.06);
+    box-shadow: 0 0 16px rgba(200, 137, 58, 0.1);
 }
 
-/* ----------- Product Cards Grid ---------- */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 28px;
+    gap: 24px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px 80px;
@@ -1374,7 +1440,7 @@ main {
 @media (max-width: 600px) {
     .products-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 16px;
+        gap: 14px;
         padding: 0 16px 60px;
     }
 }
@@ -1383,50 +1449,45 @@ main {
     .products-grid { grid-template-columns: 1fr; }
 }
 
-/* ----------- Individual Product Card ---------- */
 .product-card {
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(201, 168, 76, 0.12);
-    border-radius: 4px;
+    border: 1px solid rgba(200, 137, 58, 0.1);
+    border-radius: 2px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(15, 11, 8, 0.6);
     transition:
-        opacity    0.35s ease,
-        transform  0.35s ease,
-        border-color 0.25s ease;
+        opacity      0.35s ease,
+        transform    0.35s ease,
+        border-color 0.3s ease,
+        box-shadow   0.3s ease;
 }
 
 .product-card:hover {
-    border-color: rgba(201, 168, 76, 0.3);
+    border-color: rgba(200, 137, 58, 0.28);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 20px rgba(200,137,58,0.05);
 }
 
-/* ----------- Hidden Cards when Filter is Active ---------- */
 .product-card--hidden {
     opacity: 0 !important;
     pointer-events: none;
 }
 
-/* ----------- Product Image Wrapper ---------- */
 .product-card__image-wrap {
     position: relative;
     aspect-ratio: 1 / 1;
     overflow: hidden;
 }
 
-/* ----------- Product Image — replace with real photos when ready ---------- */
 .product-card__image {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: transform 0.5s ease;
+    transition: transform 0.55s ease;
 }
 
-.product-card:hover .product-card__image { transform: scale(1.04); }
+.product-card:hover .product-card__image { transform: scale(1.05); }
 
-/* ----------- Gradient Placeholders for Each Product ---------- */
+
 .product-card__image--1 { background: url(/images/MockupSerum.jpg) center / cover no-repeat; }
 .product-card__image--2 { background: url(/images/LipElixer.jpg) center / cover no-repeat; }
 .product-card__image--3 { background: url(/images/EyePallette.jpg) center / cover no-repeat; }
@@ -1436,34 +1497,32 @@ main {
 .product-card__image--7 { background: url(/images/LipGloss.jpg) center / cover no-repeat; }
 .product-card__image--8 { background: url(/images/SugarScrub.jpg) center / cover no-repeat; }
 
-/* ----------- Wishlist Heart Button ---------- */
 .product-card__wishlist {
     position: absolute;
     top: 12px;
     right: 12px;
     width: 32px;
     height: 32px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 8, 6, 0.6);
+    border: 1px solid rgba(200, 137, 58, 0.15);
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
+    color: rgba(240, 230, 208, 0.4);
+    font-size: 0.75rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: color 0.25s, border-color 0.25s, background 0.25s;
+    transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
 }
 
-/* ----------- Heart turns Pink when Saved ---------- */
 .product-card__wishlist:hover,
 .product-card__wishlist--active {
-    color: var(--pink);
-    border-color: var(--pink);
-    background: rgba(233, 30, 99, 0.15);
+    color: var(--rose);
+    border-color: var(--rose);
+    background: rgba(184, 113, 79, 0.12);
+    box-shadow: 0 0 12px rgba(184, 113, 79, 0.2);
 }
 
-/* ----------- Card Body ---------- */
 .product-card__body {
     display: flex;
     flex-direction: column;
@@ -1474,140 +1533,349 @@ main {
 
 .product-card__category {
     font-family: 'Jost', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 300;
-    letter-spacing: 0.22em;
+    font-size: 0.58rem;
+    font-weight: 200;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.7;
+    color: var(--amber);
+    opacity: 0.6;
 }
 
 .product-card__name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem;
     font-weight: 400;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.03em;
     line-height: 1.2;
 }
 
 .product-card__desc {
     font-family: 'Jost', sans-serif;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 200;
-    color: rgba(255, 255, 255, 0.4);
-    line-height: 1.6;
+    color: rgba(240, 230, 208, 0.35);
+    line-height: 1.65;
     flex: 1;
     margin-top: 4px;
+    letter-spacing: 0.02em;
 }
 
-/* ----------- Card Footer — Price and Add to Bag ---------- */
 .product-card__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 14px;
     padding-top: 14px;
-    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    border-top: 1px solid rgba(200, 137, 58, 0.08);
 }
 
 .product-card__price {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.3rem;
     font-weight: 300;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.04em;
 }
 
-/* ----------- Add to Bag Button ---------- */
 .product-card__add {
     background: transparent;
-    border: 1px solid var(--pink);
-    border-radius: 2px;
-    color: white;
+    border: 1px solid rgba(200, 137, 58, 0.3);
+    border-radius: 1px;
+    color: rgba(200, 58, 188, 0.7);
     cursor: pointer;
     font-family: 'Jost', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 300;
-    letter-spacing: 0.18em;
+    font-size: 0.58rem;
+    font-weight: 200;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     padding: 8px 16px;
-    transition: background 0.25s, box-shadow 0.25s;
+    transition: background 0.25s, border-color 0.25s, color 0.25s, box-shadow 0.25s;
 }
 
 .product-card__add:hover {
-    background: rgba(233, 30, 99, 0.14);
-    box-shadow: 0 0 16px rgba(233, 30, 99, 0.2);
+    background: rgba(200, 137, 58, 0.08);
+    border-color: var(--amber);
+    color: var(--amber);
+    box-shadow: 0 0 14px rgba(200, 137, 58, 0.14);
 }
 
 /* =====================================================
-   ABOUT PAGE
+   CART PANEL — Speakeasy slide-out
 ===================================================== */
 
-/* ----------- Carousel Section ---------- */
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 3, 2, 0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 1098;
+}
+
+.cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    width: 360px;
+    max-width: 100vw;
+    height: 100vh;
+    background:
+        radial-gradient(ellipse 120% 50% at 110% 20%, rgba(200,137,58,0.06) 0%, transparent 60%),
+        linear-gradient(170deg, #170f09 0%, #0d0906 55%, #0a0806 100%);
+    border-left: 1px solid rgba(200, 137, 58, 0.15);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.48s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1099;
+    box-shadow: -6px 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.cart-panel.active {
+    transform: translateX(0);
+}
+
+.cart-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 28px 24px;
+    border-bottom: 1px solid rgba(200, 137, 58, 0.1);
+}
+
+.cart-panel__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+}
+
+.cart-panel__close {
+    background: transparent;
+    border: none;
+    color: rgba(240, 230, 208, 0.3);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px;
+}
+
+.cart-panel__close:hover { color: var(--amber); }
+
+.cart-panel__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Custom scrollbar to match aesthetic */
+.cart-panel__items::-webkit-scrollbar { width: 2px; }
+.cart-panel__items::-webkit-scrollbar-track { background: transparent; }
+.cart-panel__items::-webkit-scrollbar-thumb { background: rgba(200,137,58,0.2); }
+
+.cart-empty {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 200;
+    color: rgba(240, 230, 208, 0.22);
+    text-align: center;
+    margin-top: 70px;
+    letter-spacing: 0.08em;
+    font-style: italic;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(200, 137, 58, 0.07);
+}
+
+.cart-item__info { flex: 1; }
+
+.cart-item__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+}
+
+.cart-item__price {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 200;
+    color: rgba(200, 137, 58, 0.55);
+    letter-spacing: 0.06em;
+}
+
+.cart-item__remove {
+    background: transparent;
+    border: none;
+    color: rgba(240, 230, 208, 0.2);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.cart-item__remove:hover { color: var(--rose); }
+
+.cart-panel__footer {
+    padding: 20px 28px 32px;
+    border-top: 1px solid rgba(200, 137, 58, 0.1);
+}
+
+.cart-panel__total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.cart-panel__total-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(240, 230, 208, 0.3);
+}
+
+.cart-panel__total-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+}
+
+.cart-panel__checkout {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--amber);
+    border-radius: 1px;
+    color: var(--amber);
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 200;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    padding: 15px;
+    transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+.cart-panel__checkout:hover {
+    background: rgba(200, 137, 58, 0.08);
+    box-shadow: 0 0 28px rgba(200, 137, 58, 0.18);
+    color: var(--cream);
+}
+
+/* ----------- Added to Bag Toast ---------- */
+.added-toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: rgba(21, 15, 10, 0.96);
+    border: 1px solid rgba(200, 137, 58, 0.25);
+    border-radius: 1px;
+    color: rgba(240, 230, 208, 0.8);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 200;
+    letter-spacing: 0.14em;
+    padding: 12px 28px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    z-index: 2000;
+    white-space: nowrap;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
+.added-toast.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* =====================================================
+   ABOUT PAGE — Carousel and Story
+===================================================== */
+
 .carousel-section {
     padding: 0 40px 60px;
     max-width: 900px;
     margin: 0 auto;
 }
 
-.carousel {
-    position: relative;
-}
+.carousel { position: relative; }
 
-/* ----------- Overflow Hidden so only one slide shows ---------- */
 .carousel__track-wrap {
     overflow: hidden;
-    border-radius: 4px;
-    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 1px;
+    border: 1px solid rgba(200, 137, 58, 0.12);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,137,58,0.04);
 }
 
-/* ----------- Track Slides Horizontally ---------- */
 .carousel__track {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-.carousel__slide {
-    min-width: 100%;
-}
+.carousel__slide { min-width: 100%; }
 
-/* ----------- Slide Images — replace with real photos ---------- */
 .carousel__img {
     width: 100%;
-    aspect-ratio: 16 / 20;               /* Maintains 16:9 ratio */
-    background-size: cover;             /* Ensures image covers area without distortion [1] */
-    background-position: center;        /* Centers the image [1] */
-    background-repeat: no-repeat;       /* Prevents tiling */
+    aspect-ratio: 3 / 4;
 }
 
-.carousel__img--1 { background: url(/images/Gideon-Hezekiah.jpg) center / cover no-repeat; }
+/* ----------- Warm Placeholder Gradients ---------- */
+.carousel__img--1 {background: url(/images/Gideon-Hezekiah.jpg) center / cover no-repeat; }
 .carousel__img--2 { background: url(/images/OyeShotThis.jpg) center / cover no-repeat; }
 .carousel__img--3 { background: url(/images/JessicaFelicio.jpg) center / cover no-repeat; }
-/* ----------- Previous and Next Arrow Buttons ---------- */
+
 .carousel__btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(201, 168, 76, 0.2);
+    background: rgba(10, 8, 6, 0.7);
+    border: 1px solid rgba(200, 137, 58, 0.18);
     border-radius: 50%;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(240, 230, 208, 0.55);
     width: 40px;
     height: 40px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    transition: border-color 0.25s, color 0.25s, background 0.25s, box-shadow 0.25s;
     z-index: 2;
 }
 
 .carousel__btn:hover {
-    border-color: var(--pink);
-    color: white;
-    background: rgba(233, 30, 99, 0.15);
+    border-color: var(--amber);
+    color: var(--amber);
+    background: rgba(200, 137, 58, 0.08);
+    box-shadow: 0 0 16px rgba(200, 137, 58, 0.15);
 }
 
 .carousel__btn--prev { left: -20px; }
@@ -1619,40 +1887,37 @@ main {
     .carousel-section { padding: 0 16px 48px; }
 }
 
-/* ----------- Dot Indicators ---------- */
 .carousel__dots {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 18px;
+    margin-top: 20px;
 }
 
 .carousel__dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(240, 230, 208, 0.15);
     border: none;
     cursor: pointer;
     transition: background 0.25s, transform 0.25s;
     padding: 0;
 }
 
-/* ----------- Active Dot turns Pink ---------- */
 .carousel__dot.active {
-    background: var(--pink);
-    transform: scale(1.3);
+    background: var(--amber);
+    transform: scale(1.4);
+    box-shadow: 0 0 6px rgba(200, 137, 58, 0.4);
 }
 
-.carousel__dot:hover {
-    background: rgba(201, 168, 76, 0.6);
-}
+.carousel__dot:hover { background: rgba(200, 137, 58, 0.4); }
 
-/* ----------- About Content Blocks ---------- */
+/* ----------- About Story Blocks ---------- */
 .about-body {
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 56px;
     max-width: 680px;
     margin: 0 auto;
     padding: 20px 40px 80px;
@@ -1662,37 +1927,99 @@ main {
     .about-body { padding: 20px 20px 60px; }
 }
 
-/* ----------- Gold Left Border Accent on each Block ---------- */
+/* ----------- Amber Left Border Accent ---------- */
 .about-block {
-    border-left: 1px solid rgba(201, 168, 76, 0.25);
-    padding-left: 28px;
+    border-left: 1px solid rgba(200, 137, 58, 0.22);
+    padding-left: 32px;
 }
 
 .about-block__label {
     font-family: 'Jost', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 300;
-    letter-spacing: 0.24em;
+    font-size: 0.62rem;
+    font-weight: 200;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 10px;
+    color: var(--amber);
+    margin-bottom: 12px;
+    opacity: 0.75;
 }
 
 .about-block__heading {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.9rem;
+    font-size: 2rem;
     font-weight: 300;
-    color: white;
+    color: var(--cream);
     letter-spacing: 0.04em;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
+    line-height: 1.15;
 }
 
 .about-block__text {
     font-family: 'Jost', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.86rem;
     font-weight: 200;
-    color: rgba(255, 255, 255, 0.5);
-    line-height: 1.8;
+    color: rgba(240, 230, 208, 0.42);
+    line-height: 1.85;
+    letter-spacing: 0.03em;
+}
+
+/* About Page — Side by Side Pairs */
+.about-pairs {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.about-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border: 1px solid rgba(200, 137, 58, 0.1);
+    overflow: hidden;
+}
+
+/* Alternates image left/right on every other row */
+.about-pair:nth-child(even) .about-pair__img  { order: 2; }
+.about-pair:nth-child(even) .about-pair__text { order: 1; }
+
+.about-pair__img {
+    aspect-ratio: 3 / 4;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.about-pair__img--1 { background-image: url(/images/Gideon-Hezekiah.jpg); }
+.about-pair__img--2 { background-image: url(/images/OyeShotThis.jpg); }
+.about-pair__img--3 { background-image: url(/images/JessicaFelicio.jpg); }
+
+.about-pair__text {
+    padding: 52px 48px;
+    border-left: 1px solid rgba(200, 137, 58, 0.1);
+}
+
+.about-pair:nth-child(even) .about-pair__text {
+    border-left: none;
+    border-right: 1px solid rgba(200, 137, 58, 0.1);
+}
+
+@media (max-width: 768px) {
+    .about-pair {
+        grid-template-columns: 1fr;
+    }
+    .about-pair:nth-child(even) .about-pair__img,
+    .about-pair:nth-child(even) .about-pair__text {
+        order: unset;
+    }
+    .about-pair__text {
+        border-left: none;
+        border-top: 1px solid rgba(200, 137, 58, 0.1);
+        padding: 32px 24px;
+    }
 }
 
 /* =====================================================
@@ -1700,6 +2027,8 @@ main {
 ===================================================== */
 
 @media (max-width: 768px) {
-    .page-hero__title { font-size: 2rem; }
-    .page-hero__sub   { font-size: 0.9rem; }
+    .page-hero__title { font-size: 2.4rem; }
+    .page-hero__sub   { font-size: 0.82rem; }
+    .intro { padding: 60px 24px; }
+    .values__item { padding: 40px 28px; }
 }

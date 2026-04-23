@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
 <meta charset="utf-8">
-<title>Solène</title>
+<title>Sidéral</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/main.css">
@@ -26,8 +26,8 @@
       <span></span>
     </div>
 
-    <!--- Solène Logo --->
-    <div class="logo">Solène</div>
+    <!--- Sidéral Logo --->
+    <div class="logo">Sidéral</div>
 
     <!--- Cart Icon --->
     <div class="cart-icon">
@@ -45,7 +45,7 @@
 
   <!--- Menu Branding --->
   <div class="menu-header">
-    <div class="menu-logo">Solène</div>
+    <div class="menu-logo">Sidéral</div>
     <div class="menu-tagline">Luxury Beauty · Cosmic Glow</div>
   </div>
 
@@ -67,6 +67,43 @@
   </div>
 
 </nav>
+
+<!--- ═══════════════════════════════════════════════════
+  CART PANEL — paste this block into every HTML page
+  Place it right after the closing </nav> tag and
+  before <main>
+═══════════════════════════════════════════════════ --->
+
+<!--- Cart Overlay — darkens the page behind the cart --->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!--- Cart Side Panel --->
+<div class="cart-panel" id="cartPanel">
+
+  <!--- Cart Header --->
+  <div class="cart-panel__header">
+    <h2 class="cart-panel__title">Your Bag</h2>
+    <button class="cart-panel__close" onclick="closeCart()" aria-label="Close cart">✕</button>
+  </div>
+
+  <!--- Cart Items — filled dynamically by JavaScript --->
+  <div class="cart-panel__items" id="cartItems">
+    <p class="cart-empty">Your bag is empty.</p>
+  </div>
+
+  <!--- Cart Footer — Total and Checkout --->
+  <div class="cart-panel__footer">
+    <div class="cart-panel__total-row">
+      <span class="cart-panel__total-label">Total</span>
+      <span class="cart-panel__total-value" id="cartTotal">$0</span>
+    </div>
+    <button class="cart-panel__checkout">Checkout</button>
+  </div>
+
+</div>
+
+<!--- Toast Notification — appears briefly when item is added --->
+<div class="added-toast" id="addedToast"></div>
 
 <!--- Main Content --->
 <main>
@@ -101,7 +138,7 @@
       </h1>
 
       <!--- Hero Subheading --->
-      <p class="hero__sub">Elevate your glow with Solène.</p>
+      <p class="hero__sub">Elevate your glow with Sidéral.</p>
 
       <!--- Call to Action Buttons --->
       <div class="hero__ctas">
@@ -124,20 +161,20 @@
     <div class="marquee__track">
       <span>Luxury Beauty</span><span class="marquee__sep">✦</span>
       <span>Cosmic Glow</span><span class="marquee__sep">✦</span>
-      <span>Solène</span><span class="marquee__sep">✦</span>
+      <span>Sidéral</span><span class="marquee__sep">✦</span>
       <span>Elevate Your Radiance</span><span class="marquee__sep">✦</span>
       <span>Luxury Beauty</span><span class="marquee__sep">✦</span>
       <span>Cosmic Glow</span><span class="marquee__sep">✦</span>
-      <span>Solène</span><span class="marquee__sep">✦</span>
+      <span>Sidéral</span><span class="marquee__sep">✦</span>
       <span>Elevate Your Radiance</span><span class="marquee__sep">✦</span>
       <!--- Duplicated below for a seamless infinite loop --->
       <span>Luxury Beauty</span><span class="marquee__sep">✦</span>
       <span>Cosmic Glow</span><span class="marquee__sep">✦</span>
-      <span>Solène</span><span class="marquee__sep">✦</span>
+      <span>Sidéral</span><span class="marquee__sep">✦</span>
       <span>Elevate Your Radiance</span><span class="marquee__sep">✦</span>
       <span>Luxury Beauty</span><span class="marquee__sep">✦</span>
       <span>Cosmic Glow</span><span class="marquee__sep">✦</span>
-      <span>Solène</span><span class="marquee__sep">✦</span>
+      <span>Sidéral</span><span class="marquee__sep">✦</span>
       <span>Elevate Your Radiance</span><span class="marquee__sep">✦</span>
     </div>
   </div>
@@ -157,9 +194,7 @@
 
       <!--- Intro Body Text — replace with your brand statement --->
       <p class="intro__text">
-        Your placeholder brand statement goes here. Tell visitors what makes
-        Solène different — the feeling, the craft, the culture behind
-        every product and every session.
+         Sidéral made with elegance.
       </p>
 
       <!--- Link to About Page --->
@@ -258,14 +293,14 @@
     <div class="values__item">
       <span class="values__icon"><i class="fa-regular fa-gem"></i></span>
       <h3 class="values__title">Crafted with Care</h3>
-      <p class="values__text">Small-batch, intentional production rooted in Creole tradition and culture.</p>
+      <p class="values__text">Small-batch, intentional production rooted in tradition.</p>
     </div>
 
     <!--- Value 3 --->
     <div class="values__item">
       <span class="values__icon"><i class="fa-regular fa-heart"></i></span>
       <h3 class="values__title">For Every Glow</h3>
-      <p class="values__text">Products and services designed to celebrate beauty in every shade and skin type.</p>
+      <p class="values__text">Products and services designed to celebrate beauty in every shade.</p>
     </div>
 
   </section>
@@ -275,7 +310,7 @@
 
     <!--- Gallery Header --->
     <p class="gallery__label">Follow the Glow</p>
-    <h2 class="gallery__heading">@Solène</h2>
+    <h2 class="gallery__heading">@Sidéral</h2>
 
     <!--- Gallery Grid — replace backgrounds with real Instagram image URLs --->
     <div class="gallery__grid">
